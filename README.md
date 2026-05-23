@@ -115,10 +115,10 @@ Open `notebooks/clinico_rag_kaggle.ipynb` and run all cells.
 ```bibtex
 @article{clinicorag2025,
   title   = {Clinico-RAG: A Framework for Multimodal Evidence-Based TB Diagnosis},
-  author  = {Author, Swathi and Author, Bharghavi and Author, Geethanjali and
+  author  = {Author, Swati Vinayak Bhat and Author, Bharghavi and Author, Geethanjali and
              Author, Aditya Ranjan and {Jisna V A}},
   journal = {arXiv preprint},
-  year    = {2025}
+  year    = {2026}
 }
 ```
 
