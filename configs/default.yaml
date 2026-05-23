@@ -1,0 +1,70 @@
+# configs/default.yaml
+# All hyperparameters for Clinico-RAG
+
+# ── Paths ────────────────────────────────────────────────────
+paths:
+  shenzhen_img:  "/kaggle/input/tuberculosis-tb-chest-xray-dataset/ChinaSet_AllFiles/ChinaSet_AllFiles/CXR_png"
+  shenzhen_txt:  "/kaggle/input/tuberculosis-tb-chest-xray-dataset/ChinaSet_AllFiles/ChinaSet_AllFiles/ClinicalReadings"
+  montgomery_img: "/kaggle/input/tuberculosis-tb-chest-xray-dataset/MontgomerySet/MontgomerySet/CXR_png"
+  montgomery_mask: "/kaggle/input/tuberculosis-tb-chest-xray-dataset/MontgomerySet/MontgomerySet/ManualMask"
+  output_dir:    "/kaggle/working/ckpts"
+
+# ── Model ────────────────────────────────────────────────────
+model:
+  img_size:   224
+  embed_dim:  768
+  attn_heads: 8
+  dropout:    0.1
+  clf_dropout: 0.2
+
+# ── U-Net (Stage A) ──────────────────────────────────────────
+unet:
+  encoder:    "resnet34"
+  lr:         1.0e-3
+  batch_size: 8
+  epochs:     10
+
+# ── MedXRVEncoder Training (Stage B) ─────────────────────────
+training:
+  batch_size:     16
+  seed:           42
+  val_split:      0.2
+  label_smoothing: 0.05
+
+  phase1:
+    epochs:       10
+    lr_head:      3.0e-4
+    weight_decay: 1.0e-4
+    eta_min:      1.0e-6
+
+  phase2:
+    epochs:       30
+    lr_head:      3.0e-4
+    lr_backbone:  3.0e-5
+    weight_decay: 1.0e-4
+    eta_min:      1.0e-7
+    patience:     10
+
+# ── Retrieval (Stage C) ──────────────────────────────────────
+retrieval:
+  k_bi:         30
+  k_final:      3
+  alpha_img:    0.7
+  alpha_txt:    0.3
+  cross_encoder: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  miniLM_model:  "sentence-transformers/all-MiniLM-L6-v2"
+
+# ── Report Generation (Stage D) ──────────────────────────────
+report:
+  model:          "BioMistral/BioMistral-7B"
+  quantization:   "4bit"
+  temperature:    0.7
+  top_p:          0.9
+  max_new_tokens: 300
+  repetition_penalty: 1.1
+  pubmed_max_results: 5
+
+# ── Explainability (Stage E) ─────────────────────────────────
+explainability:
+  deletion_steps: 20
+  n_samples:      4
