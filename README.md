@@ -108,22 +108,3 @@ python scripts/evaluate.py --config configs/default.yaml
 ### Kaggle (single notebook)
 Open `notebooks/clinico_rag_kaggle.ipynb` and run all cells.
 
----
-
-## Citation
-
-```bibtex
-@article{clinicorag2025,
-  title   = {Clinico-RAG: A Framework for Multimodal Evidence-Based TB Diagnosis},
-  author  = {Author, Swati Vinayak Bhat and Author, Bharghavi and Author, Geethanjali and
-             Author, Aditya Ranjan and {Jisna V A}},
-  journal = {arXiv preprint},
-  year    = {2026}
-}
-```
-
----
-
-## License
-
-MIT License. See [LICENSE](LICENSE).
